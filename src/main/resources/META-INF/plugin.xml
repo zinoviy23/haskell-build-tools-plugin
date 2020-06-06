@@ -1,0 +1,35 @@
+<idea-plugin>
+    <id>io.github.zinoviy23.stack</id>
+    <name>Haskell Stack</name>
+    <vendor email="zinoviy23@gmail.com"
+            url="https://github.com/zinoviy23">
+        zinoviy23
+    </vendor>
+
+    <description><![CDATA[
+    Support Stack build tool for Haskell<br>
+    <em>Completion in packages.yaml</em>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <projectService serviceInterface="io.github.zinoviy23.stack.deps.hackage.HackageService"
+                        serviceImplementation="io.github.zinoviy23.stack.deps.hackage.HackageServiceImpl"/>
+
+        <intentionAction>
+            <className>io.github.zinoviy23.stack.deps.hackage.DumpHackage</className>
+        </intentionAction>
+        
+        <fileType name="Haskell Package File" implementationClass="io.github.zinoviy23.stack.deps.HsPackageFileType"
+                  fieldName="INSTANCE" language="Haskell package dependency" extensions="haskellpackagefile"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
